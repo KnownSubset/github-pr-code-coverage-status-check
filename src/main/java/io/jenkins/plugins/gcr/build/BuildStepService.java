@@ -40,7 +40,7 @@ public class BuildStepService {
         } else if (comparisonOption.isTypeFixedCoverage()) {
             double fixedValue = comparisonOption.fixedCoverageAsDouble();
             // TODO: Have two separate inputs for this
-            expectedCoverage = new DefaultCoverage(fixedValue, fixedValue, fixedValue);
+            expectedCoverage = new DefaultCoverage(fixedValue, fixedValue, fixedValue, fixedValue);
         } else {
             expectedCoverage = null;
         }

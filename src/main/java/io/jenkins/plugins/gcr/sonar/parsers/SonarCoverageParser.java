@@ -6,16 +6,12 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class SonarCoverageParser {
-
     private final static String MEASURE_BRANCH = "branch_coverage";
-
     private final static String MEASURE_LINE = "line_coverage";
-
     private final static String MEASURE_OVERALL = "coverage";
-
+    private final static String MEASURE_COMPLEXITY = "complexity";
 
     public SonarCoverageParser() {
-
     }
 
     public Coverage parse(JSONObject jsonResponse) {
@@ -24,6 +20,7 @@ public class SonarCoverageParser {
         double overallRate = 0.0;
         double lineRate = 0.0;
         double branchRate = 0.0;
+        double complexityRate = 0.0;
 
         for (Object measure : jsonMeasures.toArray()) {
             final JSONObject jsonMeasure = (JSONObject) measure;
@@ -38,9 +35,12 @@ public class SonarCoverageParser {
             if (measureName.equals(MEASURE_LINE)) {
                 lineRate = measureValue;
             }
+            if (measureName.equals(MEASURE_COMPLEXITY)) {
+                complexityRate = measureValue;
+            }
         }
 
-        return new DefaultCoverage(overallRate, lineRate, branchRate);
+        return new DefaultCoverage(overallRate, lineRate, branchRate, complexityRate);
 
     }
 
