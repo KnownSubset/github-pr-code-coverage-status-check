@@ -5,7 +5,4 @@ public class SonarProjectCoverage {
     public SonarProjectCoverage() {
 
     }
-
-
-
 }

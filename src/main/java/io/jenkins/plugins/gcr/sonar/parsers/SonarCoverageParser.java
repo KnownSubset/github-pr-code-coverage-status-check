@@ -7,9 +7,9 @@ import net.sf.json.JSONObject;
 
 public class SonarCoverageParser {
 
-    private final static String MEASURE_BRANCH  = "branch_coverage";
+    private final static String MEASURE_BRANCH = "branch_coverage";
 
-    private final static String MEASURE_LINE    = "line_coverage";
+    private final static String MEASURE_LINE = "line_coverage";
 
     private final static String MEASURE_OVERALL = "coverage";
 
@@ -26,7 +26,7 @@ public class SonarCoverageParser {
         double branchRate = 0.0;
 
         for (Object measure : jsonMeasures.toArray()) {
-            final JSONObject jsonMeasure = (JSONObject)measure;
+            final JSONObject jsonMeasure = (JSONObject) measure;
             final String measureName = jsonMeasure.getString("metric");
             final double measureValue = jsonMeasure.getDouble("value");
             if (measureName.equals(MEASURE_OVERALL)) {

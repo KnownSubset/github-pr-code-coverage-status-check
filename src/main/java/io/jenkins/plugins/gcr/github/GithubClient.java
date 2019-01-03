@@ -14,10 +14,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 public class GithubClient {
 
@@ -55,7 +53,6 @@ public class GithubClient {
             InputStream stream = response.getEntity().getContent();
             String string = IOUtils.toString(stream);
             System.out.println(string);
-
             return response.getStatusLine().getStatusCode() == HttpStatus.SC_CREATED;
         };
 

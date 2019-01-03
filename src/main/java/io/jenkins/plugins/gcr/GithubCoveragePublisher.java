@@ -34,17 +34,13 @@ public class GithubCoveragePublisher extends Recorder implements SimpleBuildStep
 
     public static final int COMPARISON_SONAR = 0;
     public static final int COMPARISON_FIXED = 1;
-
     private final String filepath;
-
     private String coverageXmlType;
-
     private String coverageRateType;
-
     private ComparisonOption comparisonOption;
 
     @DataBoundConstructor
-    public GithubCoveragePublisher(String filepath, String coverageXmlType, String coverageRateType, ComparisonOption comparisonOption) throws IOException {
+    public GithubCoveragePublisher(String filepath, String coverageXmlType, String coverageRateType, ComparisonOption comparisonOption) {
         this.filepath = filepath;
         this.coverageXmlType = coverageXmlType;
         this.coverageRateType = coverageRateType;
@@ -53,10 +49,8 @@ public class GithubCoveragePublisher extends Recorder implements SimpleBuildStep
 
     @Override
     public DescriptorImpl getDescriptor() {
-        return (DescriptorImpl)super.getDescriptor();
+        return (DescriptorImpl) super.getDescriptor();
     }
-
-    // Getters / Setters
 
     public String getFilepath() {
         return filepath;
@@ -93,8 +87,6 @@ public class GithubCoveragePublisher extends Recorder implements SimpleBuildStep
         this.coverageRateType = coverageRateType;
     }
 
-    // Runner
-
     @Override
     public void perform(Run<?, ?> run, FilePath workspace, Launcher launcher, TaskListener listener) throws InterruptedException, IOException {
         listener.getLogger().println("Attempting to parse file of type, " + coverageXmlType + "");
@@ -112,7 +104,6 @@ public class GithubCoveragePublisher extends Recorder implements SimpleBuildStep
             return;
         } else {
             listener.getLogger().println(String.format("Found file '%s'", this.filepath));
-//            String xmlString = FileUtils.readFileToString(new File(pathToFile.toURI()));
         }
 
         BuildStepService buildStepService = new BuildStepService();
@@ -132,6 +123,11 @@ public class GithubCoveragePublisher extends Recorder implements SimpleBuildStep
             run.setResult(Result.FAILURE);
         }
 
+    }
+
+    @Override
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE;
     }
 
     @Extension
@@ -162,15 +158,14 @@ public class GithubCoveragePublisher extends Recorder implements SimpleBuildStep
 
         public ListBoxModel doFillCoverageRateTypeItems() {
             ListBoxModel model = new ListBoxModel();
-            // TODO: localise
             model.add("Overall", CoverageRateType.OVERALL.getName());
             model.add("Branch", CoverageRateType.BRANCH.getName());
             model.add("Line", CoverageRateType.LINE.getName());
+            model.add("Complexity", CoverageRateType.COMPLEXITY.getName());
             return model;
         }
 
         public FormValidation doCheckSonarProject(@QueryParameter String value) {
-            // TODO: Use localized Messages strings
             if (sonarProjectModel == null || sonarProjectModel.isEmpty()) {
                 return FormValidation.error("SonarQube server unreachable.");
             }
@@ -191,10 +186,5 @@ public class GithubCoveragePublisher extends Recorder implements SimpleBuildStep
             return Messages.GithubCoveragePublisher_DescriptorImpl_DisplayName();
         }
 
-    }
-
-    @Override
-    public BuildStepMonitor getRequiredMonitorService() {
-        return BuildStepMonitor.NONE;
     }
 }

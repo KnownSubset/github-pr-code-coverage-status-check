@@ -15,12 +15,12 @@ public enum CoverageType {
         this.identifier = identifier;
     }
 
-    public String getIdentifier() {
-        return identifier;
-    }
-
     public static CoverageType fromIdentifier(String identifier) {
         Stream<CoverageType> stream = Arrays.stream(CoverageType.values());
         return stream.filter(c -> c.getIdentifier().equals(identifier)).findFirst().orElse(null);
+    }
+
+    public String getIdentifier() {
+        return identifier;
     }
 }

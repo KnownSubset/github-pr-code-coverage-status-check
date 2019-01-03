@@ -42,7 +42,6 @@ public class PluginEnvironment {
         if (env.containsKey(key)) {
             return env.get(key);
         } else {
-            // TODO: localize
             throw new IllegalArgumentException(String.format("Failed to get required environmental variable '%s'", key));
         }
     }

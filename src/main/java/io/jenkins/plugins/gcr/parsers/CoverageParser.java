@@ -5,6 +5,6 @@ import io.jenkins.plugins.gcr.models.Coverage;
 
 public interface CoverageParser {
 
-    public Coverage parse(FilePath filepath) throws ParserException;
+    Coverage parse(FilePath filepath) throws ParserException;
 
 }

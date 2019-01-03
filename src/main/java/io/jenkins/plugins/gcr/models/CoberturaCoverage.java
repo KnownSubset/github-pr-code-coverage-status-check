@@ -12,11 +12,11 @@ public class CoberturaCoverage extends XmlCoverage {
     @XmlAttribute(name = "branch-rate")
     public double branchRate;
 
-    // Complexity
     @XmlAttribute(name = "complexity")
     public double complexity = -1.0f;
 
-    // Coverage Interface
+    public CoberturaCoverage() {
+    }
 
     @Override
     public double getLineRate() {
@@ -31,12 +31,6 @@ public class CoberturaCoverage extends XmlCoverage {
     @Override
     public double getComplexity() {
         return complexity;
-    }
-
-    // TODO: complexity
-
-    public CoberturaCoverage() {
-
     }
 
     @Override

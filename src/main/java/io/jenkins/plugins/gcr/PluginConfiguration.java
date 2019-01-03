@@ -24,7 +24,6 @@ public class PluginConfiguration extends AbstractDescribableImpl<PluginConfigura
     }
 
     public static final class PluginConfigurationDescriptor extends Descriptor<PluginConfiguration> {
-
         private String githubAccessToken;
         private String githubEnterpriseUrl;
 

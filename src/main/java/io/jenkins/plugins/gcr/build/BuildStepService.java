@@ -10,8 +10,6 @@ import io.jenkins.plugins.gcr.parsers.ParserFactory;
 import io.jenkins.plugins.gcr.sonar.SonarClient;
 import io.jenkins.plugins.gcr.sonar.SonarException;
 
-import java.io.File;
-
 public class BuildStepService {
 
     public BuildStepService() {
@@ -27,7 +25,14 @@ public class BuildStepService {
         return new CoverageReportAction(coverage, expectedCoverage, CoverageRateType.fromName(coverageRateType));
     }
 
-    public Coverage getExpectedCoverage(ComparisonOption comparisonOption) throws SonarException {
+    public GithubPayload generateGithubCovergePayload(CoverageReportAction coverageReport, String targetUrl) {
+        String status = coverageReport.getStatusName();
+        String description = coverageReport.getStatusDescription();
+        String context = "coverage";
+        return new GithubPayload(status, targetUrl, description, context);
+    }
+
+    private Coverage getExpectedCoverage(ComparisonOption comparisonOption) throws SonarException {
         Coverage expectedCoverage;
         if (comparisonOption.isTypeSonarProject()) {
             SonarClient client = new SonarClient();
@@ -40,13 +45,6 @@ public class BuildStepService {
             expectedCoverage = null;
         }
         return expectedCoverage;
-    }
-
-    public GithubPayload generateGithubCovergePayload(CoverageReportAction coverageReport, String targetUrl) {
-        String status = coverageReport.getStatusName();
-        String description = coverageReport.getStatusDescription();
-        String context = "coverage";
-        return new GithubPayload(status, targetUrl, description, context);
     }
 
 }

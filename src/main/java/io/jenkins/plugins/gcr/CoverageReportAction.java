@@ -3,9 +3,6 @@ package io.jenkins.plugins.gcr;
 import hudson.model.Action;
 import io.jenkins.plugins.gcr.models.Coverage;
 import io.jenkins.plugins.gcr.models.CoverageRateType;
-import io.jenkins.plugins.gcr.models.CoverageType;
-
-import static io.jenkins.plugins.gcr.models.CoverageType.JACOCO;
 
 public class CoverageReportAction implements Action {
 
