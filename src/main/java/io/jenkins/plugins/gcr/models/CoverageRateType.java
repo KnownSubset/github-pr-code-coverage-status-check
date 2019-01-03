@@ -6,7 +6,8 @@ import java.util.stream.Stream;
 public enum CoverageRateType {
     LINE("Line"),
     BRANCH("Branch"),
-    OVERALL("Overall");
+    OVERALL("Overall"),
+    COMPLEXITY("Complexity");
 
     private String name;
 
@@ -14,12 +15,12 @@ public enum CoverageRateType {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public static CoverageRateType fromName(String name) {
         Stream<CoverageRateType> stream = Arrays.stream(CoverageRateType.values());
         return stream.filter(c -> c.getName().equals(name)).findFirst().orElse(null);
+    }
+
+    public String getName() {
+        return name;
     }
 }

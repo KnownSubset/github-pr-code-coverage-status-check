@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface SonarProjectListCallback {
 
-    public void perform(List<SonarProject> projects);
+    void perform(List<SonarProject> projects);
 
 }

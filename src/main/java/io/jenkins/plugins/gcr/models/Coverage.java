@@ -6,6 +6,8 @@ public interface Coverage {
 
     double getBranchRate();
 
+    double getComplexity();
+
     double getOverallRate();
 
 }

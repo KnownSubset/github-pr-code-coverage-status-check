@@ -5,10 +5,10 @@
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
         <version>3.4</version>
-        <relativePath />
+        <relativePath/>
     </parent>
     <groupId>io.jenkins.plugins</groupId>
-    <artifactId>github-coverage-reporter</artifactId>
+    <artifactId>github-coverage-status-check</artifactId>
     <version>1.2-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <properties>
@@ -21,9 +21,8 @@
           ~ stapler-plugin.version: The Stapler Maven plugin version required by the plugin.
      -->
     </properties>
-    <name>Github Coverage Reporter</name>
+    <name>Github Code Coverage Status Check</name>
     <description>Reports code coverage stats as a github status check</description>
-    <!-- The default licence for Jenkins OSS Plugins is MIT. Substitute for the applicable one if needed. -->
     <licenses>
         <license>
             <name>Apache 2.0 License</name>
@@ -141,22 +140,12 @@
         </plugins>
     </build>
 
-    <!-- If you want this to appear on the wiki page:
-    <developers>
-      <developer>
-        <id>bhacker</id>
-        <name>Bob Q. Hacker</name>
-        <email>bhacker@nowhere.net</email>
-      </developer>
-    </developers> -->
-
-    <!--<url>https://wiki.jenkins.io/display/JENKINS/TODO+Plugin</url>-->
     <scm>
         <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>

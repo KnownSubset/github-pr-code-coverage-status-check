@@ -10,12 +10,9 @@ import io.jenkins.plugins.gcr.parsers.ParserFactory;
 import io.jenkins.plugins.gcr.sonar.SonarClient;
 import io.jenkins.plugins.gcr.sonar.SonarException;
 
-import java.io.File;
-
 public class BuildStepService {
 
     public BuildStepService() {
-
     }
 
     public CoverageReportAction generateCoverageReport(FilePath filepath, ComparisonOption comparisonOption, String coverageXmlType, String coverageRateType) throws ParserException, SonarException {
@@ -28,8 +25,14 @@ public class BuildStepService {
         return new CoverageReportAction(coverage, expectedCoverage, CoverageRateType.fromName(coverageRateType));
     }
 
+    public GithubPayload generateGithubCovergePayload(CoverageReportAction coverageReport, String targetUrl) {
+        String status = coverageReport.getStatusName();
+        String description = coverageReport.getStatusDescription();
+        String context = "coverage";
+        return new GithubPayload(status, targetUrl, description, context);
+    }
 
-    public Coverage getExpectedCoverage(ComparisonOption comparisonOption) throws SonarException {
+    private Coverage getExpectedCoverage(ComparisonOption comparisonOption) throws SonarException {
         Coverage expectedCoverage;
         if (comparisonOption.isTypeSonarProject()) {
             SonarClient client = new SonarClient();
@@ -37,20 +40,11 @@ public class BuildStepService {
         } else if (comparisonOption.isTypeFixedCoverage()) {
             double fixedValue = comparisonOption.fixedCoverageAsDouble();
             // TODO: Have two separate inputs for this
-            expectedCoverage = new DefaultCoverage(fixedValue, fixedValue, fixedValue);
+            expectedCoverage = new DefaultCoverage(fixedValue, fixedValue, fixedValue, fixedValue);
         } else {
             expectedCoverage = null;
         }
         return expectedCoverage;
-    }
-
-    public GithubPayload generateGithubCovergePayload(CoverageReportAction coverageReport, String targetUrl) {
-        String status = coverageReport.getStatusName();
-        String description = coverageReport.getStatusDescription();
-        String context = "coverage";
-        GithubPayload payload = new GithubPayload(status, targetUrl, description, context);
-
-        return payload;
     }
 
 }

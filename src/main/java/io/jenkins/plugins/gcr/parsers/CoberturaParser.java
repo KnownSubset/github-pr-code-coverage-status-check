@@ -12,20 +12,15 @@ import javax.xml.transform.sax.SAXSource;
 public class CoberturaParser implements CoverageParser {
 
     public CoberturaParser() {
-
     }
-
 
     @Override
     public Coverage parse(FilePath filepath) throws ParserException {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(CoberturaCoverage.class);
             SAXSource source = XmlUtils.getSAXSource(filepath);
-
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Coverage coverage = (Coverage) jaxbUnmarshaller.unmarshal(source);
-
-            return coverage;
+            return (Coverage) jaxbUnmarshaller.unmarshal(source);
         } catch (Exception ex) {
             String message = String.format("Failed to parse Jacoco coverage for filepath '%s'", filepath);
             throw new ParserException(message, ex);

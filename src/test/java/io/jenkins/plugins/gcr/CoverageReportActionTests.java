@@ -8,8 +8,8 @@ import org.junit.Test;
 
 public class CoverageReportActionTests {
 
-    Coverage higherCoverage = new DefaultCoverage(0.4,0.5, 0.3);
-    Coverage lowerCoverage  = new DefaultCoverage(0.2,0.3, 0.1);
+    Coverage higherCoverage = new DefaultCoverage(0.4,0.5, 0.3, 0.12);
+    Coverage lowerCoverage  = new DefaultCoverage(0.2,0.3, 0.1, 0.25);
 
     // Line
 

@@ -5,11 +5,8 @@ import net.sf.json.JSONObject;
 public class GithubPayload {
 
     private String status;
-
     private String targetUrl;
-
     private String description;
-
     private String context;
 
     public GithubPayload(String status, String targetUrl, String description, String context) {

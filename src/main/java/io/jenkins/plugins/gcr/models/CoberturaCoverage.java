@@ -12,12 +12,11 @@ public class CoberturaCoverage extends XmlCoverage {
     @XmlAttribute(name = "branch-rate")
     public double branchRate;
 
-    // Complexity
-
     @XmlAttribute(name = "complexity")
     public double complexity = -1.0f;
 
-    // Coverage Interface
+    public CoberturaCoverage() {
+    }
 
     @Override
     public double getLineRate() {
@@ -29,22 +28,13 @@ public class CoberturaCoverage extends XmlCoverage {
         return branchRate;
     }
 
-    // TODO: complexity
-
-    // Constructor
-
-    public CoberturaCoverage() {
-
+    @Override
+    public double getComplexity() {
+        return complexity;
     }
-
-    // toString
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[ ");
-        builder.append(String.format("lineRate=%f, branchRate=%f", lineRate, branchRate));
-        builder.append(" ]");
-        return builder.toString();
+        return String.format("[ lineRate=%f, branchRate=%f ]", lineRate, branchRate);
     }
 }

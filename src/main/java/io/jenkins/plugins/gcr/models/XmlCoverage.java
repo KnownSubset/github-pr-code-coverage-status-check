@@ -1,7 +1,5 @@
 package io.jenkins.plugins.gcr.models;
 
-import io.jenkins.plugins.gcr.models.Coverage;
-
 public abstract class XmlCoverage implements Coverage {
 
     @Override

@@ -20,15 +20,12 @@ import java.util.List;
 public class SonarClient {
 
     private static final String METRIC_KEY = "line_coverage,branch_coverage,coverage";
-
     private HttpClient httpClient;
-
     private String sonarHost;
-
     private int sonarPort;
 
     public SonarClient() {
-        this(HttpClientBuilder.create().build(),"localhost");
+        this(HttpClientBuilder.create().build(), "localhost");
     }
 
     public SonarClient(HttpClient client) {
@@ -44,8 +41,6 @@ public class SonarClient {
         this.sonarPort = sonarPort;
         this.httpClient = client;
     }
-
-    // Requests
 
     /**
      * Fetches a list of sonar projects
@@ -67,7 +62,7 @@ public class SonarClient {
             List<SonarProject> projects = new ArrayList<>();
 
             projectArray.forEach(item -> {
-                JSONObject obj = (JSONObject)item;
+                JSONObject obj = (JSONObject) item;
                 SonarProject project = new SonarProject(
                         obj.getString("name"),
                         obj.getString("key")

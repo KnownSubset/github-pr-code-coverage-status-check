@@ -3,15 +3,15 @@ package io.jenkins.plugins.gcr.models;
 public class DefaultCoverage implements Coverage {
 
     private double lineRate;
-
     private double branchRate;
-
+    private double complexity;
     private double overallRate;
 
-    public DefaultCoverage(double overallRate, double lineRate, double branchRate) {
+    public DefaultCoverage(double overallRate, double lineRate, double branchRate, double complexity) {
         this.lineRate = lineRate;
         this.branchRate = branchRate;
         this.overallRate = overallRate;
+        this.complexity = complexity;
     }
 
     @Override
@@ -25,5 +25,12 @@ public class DefaultCoverage implements Coverage {
     }
 
     @Override
-    public double getOverallRate() { return overallRate; }
+    public double getComplexity() {
+        return complexity;
+    }
+
+    @Override
+    public double getOverallRate() {
+        return overallRate;
+    }
 }
