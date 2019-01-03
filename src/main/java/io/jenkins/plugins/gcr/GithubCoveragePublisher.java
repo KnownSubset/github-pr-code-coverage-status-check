@@ -1,35 +1,34 @@
 package io.jenkins.plugins.gcr;
 
-import hudson.Launcher;
 import hudson.Extension;
 import hudson.FilePath;
-import hudson.model.*;
-import hudson.tasks.*;
+import hudson.Launcher;
+import hudson.model.AbstractProject;
+import hudson.model.Result;
+import hudson.model.Run;
+import hudson.model.TaskListener;
+import hudson.tasks.BuildStepDescriptor;
+import hudson.tasks.BuildStepMonitor;
+import hudson.tasks.Publisher;
+import hudson.tasks.Recorder;
 import hudson.util.FormValidation;
 import hudson.util.ListBoxModel;
 import io.jenkins.plugins.gcr.build.BuildStepService;
 import io.jenkins.plugins.gcr.github.GithubClient;
 import io.jenkins.plugins.gcr.github.GithubPayload;
-import io.jenkins.plugins.gcr.models.*;
-import io.jenkins.plugins.gcr.parsers.CoberturaParser;
-import io.jenkins.plugins.gcr.parsers.CoverageParser;
-import io.jenkins.plugins.gcr.parsers.ParserException;
-import io.jenkins.plugins.gcr.parsers.ParserFactory;
+import io.jenkins.plugins.gcr.models.ComparisonOption;
+import io.jenkins.plugins.gcr.models.CoverageRateType;
+import io.jenkins.plugins.gcr.models.CoverageType;
+import io.jenkins.plugins.gcr.models.PluginEnvironment;
 import io.jenkins.plugins.gcr.sonar.SonarClient;
-import io.jenkins.plugins.gcr.sonar.SonarException;
 import io.jenkins.plugins.gcr.sonar.models.SonarProject;
-import net.sf.json.JSONObject;
-import org.apache.commons.io.FileUtils;
-import org.kohsuke.stapler.DataBoundConstructor;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
 import jenkins.tasks.SimpleBuildStep;
+import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
-import org.kohsuke.stapler.StaplerRequest;
+
+import java.io.IOException;
+import java.util.List;
 
 public class GithubCoveragePublisher extends Recorder implements SimpleBuildStep {
 
@@ -137,10 +136,6 @@ public class GithubCoveragePublisher extends Recorder implements SimpleBuildStep
 
     @Extension
     public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
-
-
-
-
         private ListBoxModel sonarProjectModel;
 
         public ListBoxModel doFillCoverageXmlTypeItems() {

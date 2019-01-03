@@ -15,13 +15,10 @@ public class XmlUtils {
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
         spf.setFeature("http://xml.org/sax/features/validation", false);
         spf.setValidating(false);
-
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputStream inputStream = filepath.read();
         Reader fileReader = new InputStreamReader(inputStream, "UTF-8");
         InputSource inputSource = new InputSource(fileReader);
-        SAXSource source = new SAXSource(xmlReader, inputSource);
-
-        return source;
+        return new SAXSource(xmlReader, inputSource);
     }
 }

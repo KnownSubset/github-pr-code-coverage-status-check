@@ -15,7 +15,6 @@ import java.io.File;
 public class BuildStepService {
 
     public BuildStepService() {
-
     }
 
     public CoverageReportAction generateCoverageReport(FilePath filepath, ComparisonOption comparisonOption, String coverageXmlType, String coverageRateType) throws ParserException, SonarException {
@@ -27,7 +26,6 @@ public class BuildStepService {
         // TODO: This should be user selectable
         return new CoverageReportAction(coverage, expectedCoverage, CoverageRateType.fromName(coverageRateType));
     }
-
 
     public Coverage getExpectedCoverage(ComparisonOption comparisonOption) throws SonarException {
         Coverage expectedCoverage;
@@ -48,9 +46,7 @@ public class BuildStepService {
         String status = coverageReport.getStatusName();
         String description = coverageReport.getStatusDescription();
         String context = "coverage";
-        GithubPayload payload = new GithubPayload(status, targetUrl, description, context);
-
-        return payload;
+        return new GithubPayload(status, targetUrl, description, context);
     }
 
 }

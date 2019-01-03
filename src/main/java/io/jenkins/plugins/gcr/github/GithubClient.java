@@ -1,10 +1,7 @@
 package io.jenkins.plugins.gcr.github;
 
-import io.jenkins.plugins.gcr.PluginConfiguration;
 import io.jenkins.plugins.gcr.models.PluginEnvironment;
-import net.sf.json.JSONObject;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.input.ReaderInputStream;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -16,7 +13,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -26,11 +22,8 @@ import java.net.URL;
 public class GithubClient {
 
     private PluginEnvironment environment;
-
     private String accessToken;
-
     private String githubUrl;
-
     private HttpClient httpClient;
 
     public GithubClient(PluginEnvironment environment, String githubUrl, String accessToken) {
@@ -48,8 +41,6 @@ public class GithubClient {
     public void sendCommitStatus(GithubPayload githubPayload) throws GithubClientException {
 
         String path = String.format("/repos/%s/statuses/%s", environment.getPullRequestRepository(), environment.getGitHash());
-
-
         URI uri = buildUri(path);
         HttpPost postRequest = new HttpPost(uri);
 
@@ -65,11 +56,7 @@ public class GithubClient {
             String string = IOUtils.toString(stream);
             System.out.println(string);
 
-            if(response.getStatusLine().getStatusCode() == HttpStatus.SC_CREATED) {
-                return true;
-            }
-
-            return false;
+            return response.getStatusLine().getStatusCode() == HttpStatus.SC_CREATED;
         };
 
         try {

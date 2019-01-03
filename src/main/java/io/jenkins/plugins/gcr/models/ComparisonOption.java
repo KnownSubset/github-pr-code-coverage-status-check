@@ -6,9 +6,7 @@ import org.kohsuke.stapler.DataBoundSetter;
 public class ComparisonOption {
 
     private String value;
-
     private String sonarProject;
-
     private String fixedCoverage;
 
     @DataBoundConstructor
@@ -19,8 +17,6 @@ public class ComparisonOption {
     }
 
     // Getters / Setters
-
-
     public String getValue() {
         return value;
     }
@@ -39,13 +35,16 @@ public class ComparisonOption {
         this.sonarProject = sonarProject;
     }
 
-    @DataBoundSetter
     public String getFixedCoverage() {
         return fixedCoverage;
     }
 
-    // Helpers
+    @DataBoundSetter
+    public void setFixedCoverage(String fixedCoverage) {
+        this.fixedCoverage = fixedCoverage;
+    }
 
+    // Helpers
     public boolean isTypeSonarProject() {
         return sonarProject != null;
     }

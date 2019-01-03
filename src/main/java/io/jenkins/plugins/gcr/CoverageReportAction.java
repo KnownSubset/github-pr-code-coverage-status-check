@@ -10,9 +10,7 @@ import static io.jenkins.plugins.gcr.models.CoverageType.JACOCO;
 public class CoverageReportAction implements Action {
 
     private Coverage coverage;
-
     private Coverage expectedCoverage;
-
     private CoverageRateType coverageType;
 
     public CoverageReportAction(Coverage coverage, Coverage expectedCoverage, CoverageRateType coverageType) {
@@ -55,13 +53,10 @@ public class CoverageReportAction implements Action {
 
     public String getStatusDescription() {
         // TODO: localise
-        final String template = "Coverage of %s is %s expected %s.";
-
         final String fragment = isAcceptableCoverage() ? "greater than or equal to" : "lower than";
         final String actualRate = toRateFragment(coverage);
         final String expectedRate = toRateFragment(expectedCoverage);
-
-        return String.format(template, actualRate, fragment, expectedRate);
+        return String.format("Coverage of %s is %s expected %s.", actualRate, fragment, expectedRate);
     }
 
     public String getStatusName() {
@@ -72,8 +67,6 @@ public class CoverageReportAction implements Action {
         return toChosenCoverageValue(coverage) >= toChosenCoverageValue(expectedCoverage);
     }
 
-
-    // Required fields
 
     public String getIconFileName() {
         return null;
