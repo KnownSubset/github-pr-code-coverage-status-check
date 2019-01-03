@@ -16,7 +16,7 @@ import java.nio.charset.Charset;
 public class GithubClientTests {
 
     private static final String COMMIT_HASH = "8c11abea6dfc884b5fcad38026e58214c995b93c";
-    private static final String REPO = "jnewc/myrepo";
+    private static final String REPO = "KnownSubset/myrepo";
     private static final String ACCESS_TOKEN = "abc123";
 
     @Test
